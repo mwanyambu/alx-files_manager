@@ -6,7 +6,7 @@ import { del, get } from 'request';
  * redis client
  */
 
-class RedisClient() {
+class RedisClient {
   /**
    * instance of redis
    */

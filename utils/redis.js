@@ -1,6 +1,5 @@
 import { promisify } from 'util';
 import { createClient } from 'redis';
-import { del, get } from 'request';
 
 /**
  * redis client
@@ -21,15 +20,19 @@ class RedisClient {
       this.isClientConnected = true;
     });
   }
+
   isAlive() {
     return this.isClientConnected;
   }
+
   async get(key) {
     return promisify(this.client.GET).bind(this.client)(key);
   }
+
   async set(key, value, duration) {
     await promisify(this.client.SETEX).bind(this.client)(key, duration, value);
   }
+
   async del(key) {
     await promisify(this.client.DEL).bind(this.client)(key);
   }
